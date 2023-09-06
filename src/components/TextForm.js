@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import {useState} from 'react';
 
 export default function TextForm(props) {
     const [text, setText] = useState('');
@@ -28,43 +28,67 @@ export default function TextForm(props) {
         return words.length;
     }
 
-    const handleClearText = ()=>{
+    const handleClearText = () => {
         setText('');
         setOutputText('');
     }
 
     return (
         <>
-            <div className="my-5">
-                <h4>{props.heading}</h4>
-                <div className="mb-3">
+            <div>
+                <div className="my-5" style={{
+                    backgroundColor: props.theme === 'dark' ? '#2b2c2c' : 'white',
+                    color: props.theme === 'dark' ? 'white' : 'black'
+                }}>
+                    <h4>{props.heading}</h4>
+                    <div className="mb-3">
           <textarea
               className="form-control"
               value={text}
+              style={{
+                  backgroundColor: props.theme === 'dark' ? '#555556' : 'white',
+                  color: props.theme === 'dark' ? 'white' : 'black'
+              }}
               onChange={handleOnChange}
               id="myBox"
               rows="8"
               placeholder="Enter your text here"
+
           ></textarea>
+                    </div>
+                    <button className="btn mx-1 btn-primary" onClick={handleUpClick}>Convert to UpperCase</button>
+                    <button className="btn mx-1 btn-primary" onClick={handleDownClick}>Convert to SmallerCase</button>
+                    <button className="btn mx-1 btn-primary" onClick={handleClearText}>Clear Text</button>
+
                 </div>
-                <button className="btn mx-1 btn-primary" onClick={handleUpClick}>Convert to UpperCase</button>
-                <button className="btn mx-1 btn-primary" onClick={handleDownClick}>Convert to SmallerCase</button>
-                <button className="btn mx-1 btn-primary" onClick={handleClearText}>Clear Text</button>
+                <div className="container" style={{
+                    backgroundColor: props.theme === 'dark' ? '#2b2c2c' : 'white',
+                    color: props.theme === 'dark' ? 'white' : 'black'
+                }}>
+                    <h5>Text Summary</h5>
+                    <p>{calculateWordCount(text)} Words, {text.length} Characters</p>
+                    <p>Time to Read: {0.008 * calculateWordCount(text)} minutes</p>
+                </div>
+                <div style={{
+                    backgroundColor: props.theme === 'dark' ? '#2b2c2c' : 'white',
+                    color: props.theme === 'dark' ? 'white' : 'black'
+                }}>
+                    <h4>Output:</h4>
+                </div>
+                <textarea className="form-control"
+                          defaultValue={outputText}
+                          style={{
+                              backgroundColor: props.theme === 'dark' ? '#555556' : 'white',
+                              color: props.theme === 'dark' ? 'white' : 'black'
+                          }}
+                          id="outputBox"
+                          rows="5"
+                          onChange={handleOnChange}
+                          placeholder="Your output will be shown here"
+
+                ></textarea>
 
             </div>
-            <div className="container">
-                <h5>Text Summary</h5>
-                <p>{calculateWordCount(text)} Words, {text.length} Characters</p>
-                <p>Time to Read: {0.008 * calculateWordCount(text)} minutes</p>
-            </div>
-            <h4>Output:</h4>
-            <textarea className="form-control"
-                      defaultValue={outputText}
-                      id="outputBox"
-                      rows="5"
-                      onChange={handleOnChange}
-                      placeholder={"Your output will be shown here"}
-            ></textarea>
         </>
     )
 }
