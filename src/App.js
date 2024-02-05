@@ -22,10 +22,25 @@ function App() {
             <Navbar title={"TextUtils"} theme={theme} toggleTheme={toggleTheme} />
             <div className="container">
                 <TextForm theme={theme}/>
-                {/*<About />*/}
+                <About />
             </div>
         </>
     );
 }
 
 export default App;
+
+// import {BrowserRouter, Route, Routes,} from "react-router-dom";
+// import Home from './components/Home';
+// import BlogApp from "./components/BlogApp";
+// import UserApp from "./components/UserApp";
+
+// export default function App() {
+//     return (<BrowserRouter>
+//             <Routes>
+//                 <Route path="/" element={<Home/>}/>
+//                 <Route path="/blog/*" element={<BlogApp/>}/>
+//                 <Route path="/users/*" element={<UserApp/>}/>
+//             </Routes>
+//         </BrowserRouter>);
+// }

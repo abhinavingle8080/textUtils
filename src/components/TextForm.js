@@ -23,7 +23,6 @@ export default function TextForm(props) {
         if (inputText.trim() === '') {
             return 0;
         }
-        // Remove leading and trailing white spaces, and split the text into words
         const words = inputText.trim().split(/\s+/);
         return words.length;
     }
@@ -66,8 +65,8 @@ export default function TextForm(props) {
                     color: props.theme === 'dark' ? 'white' : 'black'
                 }}>
                     <h5>Text Summary</h5>
-                    <p>{calculateWordCount(text)} Words, {text.length} Characters</p>
-                    <p>Time to Read: {0.008 * calculateWordCount(text)} minutes</p>
+                    <p>{calculateWordCount(text)} Words, {text.replace(/\s/g, '').length} Characters</p>
+                    <p>Time to Read: {(0.008 * calculateWordCount(text)).toFixed(2)} minutes</p>
                 </div>
                 <div style={{
                     backgroundColor: props.theme === 'dark' ? '#2b2c2c' : 'white',
@@ -85,7 +84,6 @@ export default function TextForm(props) {
                           rows="5"
                           onChange={handleOnChange}
                           placeholder="Your output will be shown here"
-
                 ></textarea>
 
             </div>
